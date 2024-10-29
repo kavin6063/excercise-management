@@ -19,7 +19,7 @@ const ExerciseList = () => {
 
   useEffect(() => {
     // Initialize sortable on the exercise list container
-    if (listRef.current) {
+    if (listRef.current && !listRef.current.sortable) {
       Sortable.create(listRef.current, {
         animation: 150,
         onEnd: (event) => {
@@ -33,8 +33,9 @@ const ExerciseList = () => {
           );
         },
       });
+      listRef.current.sortable = true;
     }
-  }, [dispatch]);
+  }, [dispatch, listRef, exercises]);
 
   const handleIncrement = (id, name) => {
     dispatch(incrementParam({ id, side: currentSide.toLowerCase(), name }));

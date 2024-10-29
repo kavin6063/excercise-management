@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   exercises: [],
   savedPrograms: [],
+  selectedDays: [],
 };
 
 const exerciseSlice = createSlice({
@@ -67,16 +68,27 @@ const exerciseSlice = createSlice({
       state.exercises.splice(destinationIndex, 0, movedExercise);
     },
     saveProgram: (state, action) => {
-      const { programName } = action.payload;
+      const { programName, customInstructions } = action.payload;
       if (programName && state.exercises.length > 0) {
         state.savedPrograms.push({
           programName,
           exercises: [...state.exercises], // Make a copy of the current exercises
+          instructions: customInstructions,
+          selectedDays: [...state.selectedDays],
         });
       }
     },
     clearExercises: (state) => {
       state.exercises = []; // Clear all exercises
+    },
+    updateCustomInstructions: (state, action) => {
+      state.customInstructions = action.payload;
+    },
+    setCustomInstructions: (state, action) => {
+      state.customInstructions = action.payload;
+    },
+    updateSelectedDays: (state, action) => {
+      state.selectedDays = action.payload;
     },
   },
 });
@@ -90,6 +102,9 @@ export const {
   reorderExercises,
   saveProgram,
   clearExercises,
+  updateCustomInstructions,
+  setCustomInstructions,
+  updateSelectedDays,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveProgram, clearExercises } from "../redux/exerciseSlice";
+import {
+  saveProgram,
+  clearExercises,
+  setCustomInstructions,
+} from "../redux/exerciseSlice";
 
 const ExerciseForm = () => {
   const [programName, setProgramName] = useState("");
   const dispatch = useDispatch();
   const exercises = useSelector((state) => state.exercises.exercises);
+  const customInstructions = useSelector(
+    (state) => state.exercises.customInstructions
+  );
+  const selectedDays = useSelector((state) => state.exercises.selectedDays);
 
   const handleSaveProgram = () => {
-    if (programName.trim() && exercises.length > 0) {
-      dispatch(saveProgram({ programName }));
+    if (programName.trim() && exercises.length > 0 && customInstructions) {
+      dispatch(saveProgram({ programName, customInstructions, selectedDays }));
       setProgramName(""); // Clear the input after saving
+      dispatch(setCustomInstructions(""));
       alert("Program saved successfully!");
     } else {
-      alert("Please enter a program name and add exercises before saving.");
+      alert(
+        "Please enter a program name or add exercises or custom message before saving."
+      );
     }
   };
 
