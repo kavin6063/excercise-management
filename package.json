@@ -1,0 +1,19 @@
+{
+  "name": "excercise-management",
+  "version": "1.0.0",
+  "description": "excercise  management app for therapist to assign excercises for patients",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "author": "kavin",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
