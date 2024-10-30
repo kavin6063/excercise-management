@@ -1,38 +1,69 @@
 import { useState } from "react";
-
 import {
   ExerciseDropdown,
   ExerciseList,
   ExerciseForm,
   CustomMessage,
   WeekdaySelector,
+  DailyFrequency,
+  BreakInterval,
 } from "../components";
 
 const ExerciseProgramPage = () => {
   return (
     <>
-      <div className="container mx-auto min-h-96 p-4">
-        <h1 className="text-2xl font-bold mb-4">Exercise Planner</h1>
+      {/* Main container */}
+      <div className="container mx-auto p-6 bg-gray-50 min-h-screen">
+        {/* Page title */}
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-6 text-center border-b-2 border-blue-500 pb-4">
+          Therapist's Program
+        </h1>
 
-        {/* Flex container for dropdown and form, with responsive and justify-between styling */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-4">
-          <div className="w-full sm:w-1/2">
+        {/* Dropdown and form section */}
+        <div className="flex flex-col  justify-center items-center w-full gap-6 ">
+          <div className="w-full md:w-1/2 p-4 bg-white shadow-lg rounded-lg border border-gray-200">
             <ExerciseDropdown />
           </div>
-          <div className="w-full sm:w-1/2">
+          <div className="w-full md:w-1/2 p-4 bg-white shadow-lg rounded-lg border border-gray-200">
             <ExerciseForm />
           </div>
         </div>
 
-        <div className="max-w-screen-lg ">
+        {/* Exercise list section */}
+        <div className="max-w-screen-lg mx-auto flex gap-2 p-4">
           <ExerciseList />
         </div>
       </div>
 
-      <div className="container mx-auto p-4">
-        <div className="flex flex-col gap-4">
-          <WeekdaySelector />
-          <CustomMessage /> {/* Display the custom message input */}
+      {/* Bottom container with weekday selector and custom message */}
+      <div className="container mx-auto p-2">
+        <div className="flex flex-col gap-6">
+          <div className="p-4 flex flex-col md:flex-row justify-around items-center bg-gray-50 shadow-md rounded-lg border border-gray-200 gap-4">
+            {/* Weekday Selector */}
+            <div className="flex flex-col items-center w-full md:w-1/3">
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">Days</h3>
+              <WeekdaySelector />
+            </div>
+            {/* Break Interval */}
+            <div className="flex flex-col items-center w-full md:w-1/3">
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                Break Interval
+              </h3>
+              <BreakInterval />
+            </div>
+            {/* Daily Frequency */}
+            <div className="flex flex-col items-center w-full md:w-1/3">
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                Frequency
+              </h3>
+              <DailyFrequency />
+            </div>
+          </div>
+
+          {/* Custom Message Section */}
+          <div className="p-4 bg-gray-50 shadow-md rounded-lg border border-gray-200">
+            <CustomMessage />
+          </div>
         </div>
       </div>
     </>

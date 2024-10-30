@@ -14,19 +14,21 @@ const ExerciseForm = () => {
     (state) => state.exercises.customInstructions
   );
   const selectedDays = useSelector((state) => state.exercises.selectedDays);
+  const breakInterval = useSelector((state) => state.exercises.breakInterval);
+  const dailyFrequency = useSelector((state) => state.exercises.dailyFrequency);
 
   const handleSaveProgram = async () => {
     if (programName.trim() && exercises.length > 0 && customInstructions) {
-      // Prepare the data to be sent
       const programData = {
         programName,
         exercises,
         instructions: customInstructions,
         selectedDays,
+        breakInterval,
+        dailyFrequency,
       };
 
       try {
-        // Send POST request to the backend
         const response = await fetch("http://localhost:3001/api/exercises", {
           method: "POST",
           headers: {
@@ -41,10 +43,8 @@ const ExerciseForm = () => {
 
         const savedProgram = await response.json();
 
-        // Optionally dispatch Redux action if needed
         dispatch(saveProgram(savedProgram));
 
-        // Clear input fields and reset state
         setProgramName("");
         dispatch(setCustomInstructions(""));
 
@@ -66,24 +66,27 @@ const ExerciseForm = () => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-gray-100 p-4 rounded-lg shadow-md w-full max-w-md mx-auto">
-      <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+    <div className="flex flex-col items-center justify-center gap-4 bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto my-4 sm:my-8">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
+        Create Your Program
+      </h2>
+      <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
         <input
           type="text"
           placeholder="Program Name"
           value={programName}
           onChange={(e) => setProgramName(e.target.value)}
-          className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full sm:flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <button
-          className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out"
+          className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out"
           onClick={handleSaveProgram}
         >
           Save Program
         </button>
       </div>
       <button
-        className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out"
+        className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out mt-2 sm:mt-0"
         onClick={handleClearAll}
       >
         Clear All

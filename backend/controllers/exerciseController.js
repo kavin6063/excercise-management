@@ -2,13 +2,22 @@ import ExerciseProgram from "../models/ExerciseProgram.js";
 
 // Create a new exercise program
 export const createProgram = async (req, res) => {
-  const { programName, exercises, instructions, selectedDays } = req.body;
+  const {
+    programName,
+    exercises,
+    instructions,
+    selectedDays,
+    dailyFrequency,
+    breakInterval,
+  } = req.body;
 
   const newProgram = new ExerciseProgram({
     programName,
     exercises,
     instructions,
     selectedDays,
+    dailyFrequency,
+    breakInterval,
   });
 
   try {
@@ -45,7 +54,11 @@ export const updateProgramById = async (req, res) => {
   try {
     const updatedProgram = await ExerciseProgram.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      {
+        ...req.body,
+        dailyFrequency: req.body.dailyFrequency,
+        breakInterval: req.body.breakInterval,
+      },
       { new: true }
     );
     if (!updatedProgram)

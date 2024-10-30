@@ -4,13 +4,13 @@ import { updateSelectedDays } from "../redux/exerciseSlice";
 
 // Define weekday options
 const weekdays = [
-  { id: 1, name: "Mon" },
-  { id: 2, name: "Tue" },
-  { id: 3, name: "Wed" },
-  { id: 4, name: "Thur" },
-  { id: 5, name: "Fri" },
-  { id: 6, name: "Sat" },
-  { id: 7, name: "Sun" },
+  { id: 1, name: "Mon", placeholder: "M" },
+  { id: 2, name: "Tue", placeholder: "T" },
+  { id: 3, name: "Wed", placeholder: "W" },
+  { id: 4, name: "Thur", placeholder: "Th" },
+  { id: 5, name: "Fri", placeholder: "F" },
+  { id: 6, name: "Sat", placeholder: "Sa" },
+  { id: 7, name: "Sun", placeholder: "Su" },
 ];
 
 const WeekdaySelector = () => {
@@ -30,17 +30,21 @@ const WeekdaySelector = () => {
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Select Days of the Week</h2>
-      <div className="flex flex-row items-end space-x-3">
+      <div className="flex flex-row items-center justify-between ">
         {weekdays.map((day) => (
-          <label key={day.id} className="flex items-center">
-            <input
-              type="checkbox"
-              checked={selectedDays.includes(day.name)}
-              onChange={() => toggleDay(day.name)}
-              className="mr-2 h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-            />
-            <span className="text-lg">{day.name}</span>
-          </label>
+          <button
+            key={day.id}
+            onClick={() => toggleDay(day.name)}
+            className={`h-12 w-12 flex items-center justify-center rounded-full font-semibold text-lg
+              ${
+                selectedDays.includes(day.name)
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-700"
+              }
+              focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          >
+            {day.placeholder}
+          </button>
         ))}
       </div>
     </div>

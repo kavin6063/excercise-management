@@ -5,3 +5,7 @@
 /* *{
     outline: orangered solid 1px;
 } */
+
+body {
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

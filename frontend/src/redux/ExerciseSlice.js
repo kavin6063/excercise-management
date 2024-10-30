@@ -26,6 +26,8 @@ const initialState = {
   savedPrograms: [],
   selectedDays: [],
   customInstructions: "",
+  breakInterval: 60, // Default break interval in seconds
+  dailyFrequency: 1, // Default frequency of sessions per day
 };
 
 // Slice definition
@@ -108,6 +110,24 @@ const exerciseSlice = createSlice({
     },
     setCustomInstructions: (state, action) => {
       state.customInstructions = action.payload;
+    }, // New reducers for break interval
+    incrementBreakInterval: (state) => {
+      state.breakInterval += 1; // Increment by 1 second
+    },
+    decrementBreakInterval: (state) => {
+      if (state.breakInterval > 0) {
+        state.breakInterval -= 1; // Decrement by 1 second
+      }
+    },
+
+    // New reducers for daily frequency
+    incrementDailyFrequency: (state) => {
+      state.dailyFrequency += 1; // Increment by 1 session
+    },
+    decrementDailyFrequency: (state) => {
+      if (state.dailyFrequency > 0) {
+        state.dailyFrequency -= 1; // Decrement by 1 session
+      }
     },
     updateSelectedDays: (state, action) => {
       state.selectedDays = action.payload;
@@ -139,6 +159,10 @@ export const {
   updateCustomInstructions,
   setCustomInstructions,
   updateSelectedDays,
+  incrementBreakInterval,
+  decrementBreakInterval,
+  incrementDailyFrequency,
+  decrementDailyFrequency,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;
