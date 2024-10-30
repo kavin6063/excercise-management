@@ -1,4 +1,3 @@
-// exerciseSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // Async actions
@@ -26,8 +25,8 @@ const initialState = {
   savedPrograms: [],
   selectedDays: [],
   customInstructions: "",
-  breakInterval: 60, // Default break interval in seconds
-  dailyFrequency: 1, // Default frequency of sessions per day
+  breakInterval: 60,
+  dailyFrequency: 1,
 };
 
 // Slice definition
@@ -110,23 +109,22 @@ const exerciseSlice = createSlice({
     },
     setCustomInstructions: (state, action) => {
       state.customInstructions = action.payload;
-    }, // New reducers for break interval
+    },
     incrementBreakInterval: (state) => {
-      state.breakInterval += 1; // Increment by 1 second
+      state.breakInterval += 1;
     },
     decrementBreakInterval: (state) => {
       if (state.breakInterval > 0) {
-        state.breakInterval -= 1; // Decrement by 1 second
+        state.breakInterval -= 1;
       }
     },
 
-    // New reducers for daily frequency
     incrementDailyFrequency: (state) => {
-      state.dailyFrequency += 1; // Increment by 1 session
+      state.dailyFrequency += 1;
     },
     decrementDailyFrequency: (state) => {
       if (state.dailyFrequency > 0) {
-        state.dailyFrequency -= 1; // Decrement by 1 session
+        state.dailyFrequency -= 1;
       }
     },
     updateSelectedDays: (state, action) => {

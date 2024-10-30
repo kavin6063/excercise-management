@@ -18,8 +18,8 @@ const ExerciseProgramSchema = new mongoose.Schema(
     ],
     instructions: { type: String },
     selectedDays: [String],
-    dailyFrequency: { type: Number, default: 1 }, // Added field
-    breakInterval: { type: Number, default: 60 }, // Added field
+    dailyFrequency: { type: Number, default: 1 },
+    breakInterval: { type: Number, default: 60 },
   },
   { timestamps: true }
 );

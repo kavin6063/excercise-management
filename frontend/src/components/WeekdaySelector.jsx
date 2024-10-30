@@ -17,13 +17,11 @@ const WeekdaySelector = () => {
   const dispatch = useDispatch();
   const selectedDays = useSelector((state) => state.exercises.selectedDays);
 
-  // Toggle day selection
   const toggleDay = (name) => {
     const updatedDays = selectedDays.includes(name)
       ? selectedDays.filter((day) => day !== name)
       : [...selectedDays, name];
 
-    // Dispatch action to update selected days in Redux
     dispatch(updateSelectedDays(updatedDays));
   };
 

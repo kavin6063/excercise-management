@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPrograms, updateSelectedDays } from "../redux/exerciseSlice";
-import { FaDumbbell, FaClock, FaRedo, FaLayerGroup } from "react-icons/fa"; // Importing icons
+import { FaDumbbell, FaClock, FaRedo, FaLayerGroup } from "react-icons/fa";
 const SavedProgram = () => {
   const dispatch = useDispatch();
   const savedPrograms = useSelector((state) => state.exercises.savedPrograms);
 
   useEffect(() => {
-    // Fetch saved programs when the component mounts
     dispatch(fetchPrograms());
   }, [dispatch]);
 
@@ -16,7 +15,6 @@ const SavedProgram = () => {
       ? savedPrograms[0].selectedDays.filter((d) => d !== day)
       : [...savedPrograms[0].selectedDays, day];
 
-    // Dispatch action to update selected days
     dispatch(updateSelectedDays(updatedDays));
   };
   const handleDeleteAll = async () => {
@@ -30,7 +28,7 @@ const SavedProgram = () => {
 
       if (response.ok) {
         alert("All programs deleted successfully.");
-        dispatch(fetchPrograms()); // Refetch or update state
+        dispatch(fetchPrograms());
       } else {
         throw new Error("Failed to delete all programs");
       }
