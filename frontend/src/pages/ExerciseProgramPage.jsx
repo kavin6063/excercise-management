@@ -8,15 +8,15 @@ import {
   DailyFrequency,
   BreakInterval,
 } from "../components";
-
+import { GiHospitalCross } from "react-icons/gi";
 const ExerciseProgramPage = () => {
   return (
     <>
       {/* Main container */}
       <div className="container mx-auto p-6 bg-gray-50 min-h-screen">
         {/* Page title */}
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-6 text-center border-b-2 border-blue-500 pb-4">
-          Therapist's Program
+        <h1 className="text-3xl flex justify-center gap-4 items-center font-extrabold text-[#295eb4] mb-6 text-center border-b-2 border-blue-500 pb-4">
+          <GiHospitalCross size={40} /> Therapist's Program
         </h1>
 
         {/* Dropdown and form section */}
