@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSelectedDays } from "../redux/exerciseSlice";
 
+// Define weekday options
 const weekdays = [
   { id: 1, name: "Mon" },
   { id: 2, name: "Tue" },
@@ -16,12 +17,16 @@ const WeekdaySelector = () => {
   const dispatch = useDispatch();
   const selectedDays = useSelector((state) => state.exercises.selectedDays);
 
+  // Toggle day selection
   const toggleDay = (name) => {
     const updatedDays = selectedDays.includes(name)
       ? selectedDays.filter((day) => day !== name)
       : [...selectedDays, name];
+
+    // Dispatch action to update selected days in Redux
     dispatch(updateSelectedDays(updatedDays));
   };
+
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Select Days of the Week</h2>

@@ -1,12 +1,34 @@
 // exerciseSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+// Async actions
+export const fetchPrograms = createAsyncThunk(
+  "exercises/fetchPrograms",
+  async () => {
+    const response = await fetch("http://localhost:3001/api/exercises");
+    return response.json();
+  }
+);
+
+export const deleteProgram = createAsyncThunk(
+  "exercises/deleteProgram",
+  async (id) => {
+    await fetch(`http://localhost:3001/api/exercises/${id}`, {
+      method: "DELETE",
+    });
+    return id;
+  }
+);
+
+// Initial state
 const initialState = {
   exercises: [],
   savedPrograms: [],
   selectedDays: [],
+  customInstructions: "",
 };
 
+// Slice definition
 const exerciseSlice = createSlice({
   name: "exercises",
   initialState,
@@ -72,14 +94,14 @@ const exerciseSlice = createSlice({
       if (programName && state.exercises.length > 0) {
         state.savedPrograms.push({
           programName,
-          exercises: [...state.exercises], // Make a copy of the current exercises
+          exercises: [...state.exercises],
           instructions: customInstructions,
           selectedDays: [...state.selectedDays],
         });
       }
     },
     clearExercises: (state) => {
-      state.exercises = []; // Clear all exercises
+      state.exercises = [];
     },
     updateCustomInstructions: (state, action) => {
       state.customInstructions = action.payload;
@@ -91,8 +113,20 @@ const exerciseSlice = createSlice({
       state.selectedDays = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPrograms.fulfilled, (state, action) => {
+        state.savedPrograms = action.payload;
+      })
+      .addCase(deleteProgram.fulfilled, (state, action) => {
+        state.savedPrograms = state.savedPrograms.filter(
+          (prog) => prog.id !== action.payload
+        );
+      });
+  },
 });
 
+// Export actions
 export const {
   addExercise,
   updateExerciseParam,

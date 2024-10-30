@@ -15,12 +15,44 @@ const ExerciseForm = () => {
   );
   const selectedDays = useSelector((state) => state.exercises.selectedDays);
 
-  const handleSaveProgram = () => {
+  const handleSaveProgram = async () => {
     if (programName.trim() && exercises.length > 0 && customInstructions) {
-      dispatch(saveProgram({ programName, customInstructions, selectedDays }));
-      setProgramName(""); // Clear the input after saving
-      dispatch(setCustomInstructions(""));
-      alert("Program saved successfully!");
+      // Prepare the data to be sent
+      const programData = {
+        programName,
+        exercises,
+        instructions: customInstructions,
+        selectedDays,
+      };
+
+      try {
+        // Send POST request to the backend
+        const response = await fetch("http://localhost:3001/api/exercises", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(programData),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save program");
+        }
+
+        const savedProgram = await response.json();
+
+        // Optionally dispatch Redux action if needed
+        dispatch(saveProgram(savedProgram));
+
+        // Clear input fields and reset state
+        setProgramName("");
+        dispatch(setCustomInstructions(""));
+
+        alert("Program saved successfully!");
+      } catch (error) {
+        console.error("Error saving program:", error);
+        alert("Failed to save program. Please try again.");
+      }
     } else {
       alert(
         "Please enter a program name or add exercises or custom message before saving."

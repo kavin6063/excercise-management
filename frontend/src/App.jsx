@@ -1,11 +1,17 @@
-import React from "react";
-import ExerciseProgramPage from "./pages/ExcerciseProgramPage";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ExerciseProgramPage from "./pages/ExerciseProgramPage";
+import SavedProgramsPage from "./pages/SavedProgramsPage";
+import Navbar from "./components/Navbar"; // Optional: for navigation links
 
 const App = () => {
   return (
-    <>
-      <ExerciseProgramPage />
-    </>
+    <Router>
+      <Navbar /> {/* Optional Navbar for easy navigation */}
+      <Routes>
+        <Route path="/" element={<ExerciseProgramPage />} />
+        <Route path="/saved-programs" element={<SavedProgramsPage />} />
+      </Routes>
+    </Router>
   );
 };
 

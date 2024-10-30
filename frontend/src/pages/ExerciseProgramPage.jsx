@@ -8,7 +8,7 @@ import {
   WeekdaySelector,
 } from "../components";
 
-const ExcerciseProgramPage = () => {
+const ExerciseProgramPage = () => {
   return (
     <>
       <div className="container mx-auto min-h-96 p-4">
@@ -39,4 +39,4 @@ const ExcerciseProgramPage = () => {
   );
 };
 
-export default ExcerciseProgramPage;
+export default ExerciseProgramPage;
