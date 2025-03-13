@@ -16,7 +16,7 @@ const SavedProgram = () => {
       : [...savedPrograms[0].selectedDays, day];
 
     dispatch(updateSelectedDays(updatedDays));
-  };
+  };dd
   const handleDeleteAll = async () => {
     if (!window.confirm("Are you sure you want to delete all programs?"))
       return;
