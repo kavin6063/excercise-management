@@ -164,5 +164,3 @@ export const {
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;
-
-// need to improve
